@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use JSON;
+use Data::Dumper;
+
+$/ = undef;
+my $json = <>; # assume data is coming in already utf8-encoded
+
+if (-f $json) {
+    open my $fh, '<', $json or die "Can't open $json $!";
+    $json = <$fh>;
+}
+
+my $perldata = decode_json $json;
+
+print Dumper($perldata);
+
